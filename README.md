@@ -7,6 +7,8 @@ appearance-none
 focus:ring-0
 peer
 
+group
+group/item
 ```
 
 ## prisma
