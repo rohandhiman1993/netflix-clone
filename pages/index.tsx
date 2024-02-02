@@ -1,5 +1,9 @@
+import Billboard from "@/components/Billboard";
+import MovieList from "@/components/MovieList";
 import Navbar from "@/components/Navbar";
 import useCurrentUser from "@/hooks/useCurrentUser";
+import useFavorites from "@/hooks/useFavorites";
+import useMovieList from "@/hooks/useMovieList";
 import { NextPageContext } from "next";
 import { getSession, signOut } from "next-auth/react";
 
@@ -20,36 +24,17 @@ export async function getServerSideProps(context:NextPageContext){
 }
 
 export default function Home() {
-  const {data:user} = useCurrentUser();
+  // const {data:user} = useCurrentUser();
+  const {data:movies = []} =  useMovieList();
+  const {data:favorites = []} = useFavorites()
   return (
    <>
    <Navbar />
-   <div className="bg-gray-500">
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-    <div className="h-96"></div>
-   </div>
+  <Billboard />
+  <div className="pb-40">
+    <MovieList title="Trending Now" data={movies}/>
+    <MovieList title="My List" data={favorites}/>
+  </div>
     {/* <p className="text-2xl text-green-500">Netflix Clone</p> */}
     {/* <p className="text-white">{user?.name}</p> */}
     {/* <button className="h-10 w-full bg-white" onClick={() => signOut()}>Logout</button> */}
